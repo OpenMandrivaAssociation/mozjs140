@@ -2,8 +2,8 @@
 
 %global pre_release %{nil}
 %define pkgname mozjs
-%define api 128
-%define major 128
+%define api 140
+%define major 140
 %define majorlib 0
 %define libmozjs %mklibname %{pkgname} %{api} %{major}
 %define libmozjs_devel %mklibname %{pkgname} %{api} -d
@@ -18,36 +18,40 @@
 
 Summary:	JavaScript interpreter and libraries
 Name:		mozjs128
-Version:	128.12.0
+Version:	140.2.0
 Release:	1
 License:	MPLv2.0 and BSD and GPLv2+ and GPLv3+ and LGPLv2.1 and LGPLv2.1+
 URL:		https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Releases/%{major}
 Source0:        https://ftp.mozilla.org/pub/firefox/releases/%{version}esr/source/firefox-%{version}esr.source.tar.xz
 
-# Patches from Debian mozjs60, mozjs68, mozjs102, rebased for mozjs115:
-Patch01:	https://src.fedoraproject.org/rpms/mozjs115/raw/master/f/fix-soname.patch
-Patch02:	https://src.fedoraproject.org/rpms/mozjs115/raw/master/f/copy-headers.patch
-Patch03:	https://src.fedoraproject.org/rpms/mozjs115/raw/master/f/tests-increase-timeout.patch
-Patch09:	https://src.fedoraproject.org/rpms/mozjs115/raw/master/f/icu_sources_data.py-Decouple-from-Mozilla-build-system.patch
-Patch10:	https://src.fedoraproject.org/rpms/mozjs115/raw/master/f/icu_sources_data-Write-command-output-to-our-stderr.patch
+# Patches
+Patch01:	https://src.fedoraproject.org/rpms/mozjs140/raw/master/f/fix-soname.patch
+Patch02:	https://src.fedoraproject.org/rpms/mozjs140/raw/master/f/copy-headers.patch
+Patch03:	https://src.fedoraproject.org/rpms/mozjs140/raw/master/f/tests-increase-timeout.patch
+Patch09:	https://src.fedoraproject.org/rpms/mozjs140/raw/master/f/icu_sources_data.py-Decouple-from-Mozilla-build-system.patch
+Patch10:	https://src.fedoraproject.org/rpms/mozjs140/raw/master/f/icu_sources_data-Write-command-output-to-our-stderr.patch
 
-Patch11:        https://src.fedoraproject.org/rpms/mozjs115/blob/rawhide/f/remove-sloppy-m4-detection-from-bundled-autoconf.patch
+#Patch11:        https://src.fedoraproject.org/rpms/mozjs115/blob/rawhide/f/remove-sloppy-m4-detection-from-bundled-autoconf.patch
  
 # Build fixes - https://hg.mozilla.org/mozilla-central/rev/ca36a6c4f8a4a0ddaa033fdbe20836d87bbfb873
-Patch12:	https://src.fedoraproject.org/rpms/mozjs115/raw/master/f/emitter.patch
+Patch12:	https://src.fedoraproject.org/rpms/mozjs140/raw/master/f/emitter.patch
 
-Patch13: https://src.fedoraproject.org/rpms/mozjs115/blob/rawhide/f/tests-Use-native-TemporaryDirectory.patch
+Patch13: https://src.fedoraproject.org/rpms/mozjs140/blob/rawhide/f/tests-Use-native-TemporaryDirectory.patch
 
 # Build fixes
-Patch14:	https://src.fedoraproject.org/rpms/mozjs115/raw/master/f/init_patch.patch
+Patch14:	https://src.fedoraproject.org/rpms/mozjs140/raw/master/f/init_patch.patch
+
+# Fixes backported from upstream
+Patch15:        9aa8b4b051dd539e0fbd5e08040870b3c712a846.patch
+Patch16:        D261512.1755672843.diff
 
 # TODO: Check with mozilla for cause of these fails and re-enable spidermonkey compile time checks if needed
-Patch15:	https://src.fedoraproject.org/rpms/mozjs115/raw/master/f/spidermonkey_checks_disable.patch
+Patch20:	https://src.fedoraproject.org/rpms/mozjs140/raw/master/f/spidermonkey_checks_disable.patch
 
 # tentative patch for RUSTFLAGS parsing issue, taken from firefox package:
 # https://bugzilla.redhat.com/show_bug.cgi?id=2184743
 # https://bugzilla.mozilla.org/show_bug.cgi?id=1474486
-Patch16:        https://src.fedoraproject.org/rpms/mozjs115/blob/rawhide/f/firefox-112.0-commasplit.patch
+#Patch16:        https://src.fedoraproject.org/rpms/mozjs115/blob/rawhide/f/firefox-112.0-commasplit.patch
 
 #Patch17:	firefox-115-clang19.patch
 
@@ -105,13 +109,14 @@ pushd ../..
 %patch 03 -p1 -b .03~
 %patch 09 -p1 -b .09~
 %patch 10 -p1 -b .10~
-%patch 11 -p1 -b .11~ 
+#patch 11 -p1 -b .11~ 
 %patch 12 -p1 -b .12~
 %patch 13 -p1 -b .13~
 %patch 14 -p1 -b .14~
 %patch 15 -p1 -b .15~
 %patch 16 -p1 -b .16~
 %patch 17 -p1 -b .17~
+%patch 20 -p1 -b .20~
 
 # Fix link for icu 76
 sed -i 's/icu-i18n/icu-uc &/' js/moz.configure
