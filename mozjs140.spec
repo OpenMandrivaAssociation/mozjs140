@@ -55,6 +55,11 @@ Patch20:	https://src.fedoraproject.org/rpms/mozjs140/raw/master/f/spidermonkey_c
 
 #Patch17:	firefox-115-clang19.patch
 
+BuildRequires: make
+BuildRequires: automake
+BuildRequires: libtool
+BuildRequires: autoconf
+BuildRequires: m4
 BuildRequires:	pkgconfig(icu-i18n)
 BuildRequires:	pkgconfig(nspr)
 BuildRequires:	pkgconfig(libffi)
@@ -65,7 +70,7 @@ BuildRequires:	zip
 BuildRequires:	python
 BuildRequires:	rust
 BuildRequires:	cargo
-BuildRequires:  cbindgen
+BuildRequires: cbindgen
 BuildRequires:	llvm-devel clang-devel
 %ifarch %{x86_64}
 # FIXME without this, configure barfs on znver1. Need to find a proper fix.
@@ -102,7 +107,7 @@ you will need to install %{name}-devel.
 %setup -q -n firefox-%{version}/js/src
 
 pushd ../..
-#config_update
+%config_update
 
 %patch 01 -p1 -b .01~
 %patch 02 -p1 -b .02~
