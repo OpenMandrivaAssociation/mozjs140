@@ -102,7 +102,7 @@ you will need to install %{name}-devel.
 %setup -q -n firefox-%{version}/js/src
 
 pushd ../..
-%config_update
+#config_update
 
 %patch 01 -p1 -b .01~
 %patch 02 -p1 -b .02~
