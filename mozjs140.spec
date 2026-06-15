@@ -120,7 +120,7 @@ pushd ../..
 %patch 14 -p1 -b .14~
 %patch 15 -p1 -b .15~
 %patch 16 -p1 -b .16~
-%patch 17 -p1 -b .17~
+#patch 17 -p1 -b .17~
 %patch 20 -p1 -b .20~
 
 # Fix link for icu 76
