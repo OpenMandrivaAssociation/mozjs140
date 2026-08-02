@@ -11,12 +11,12 @@ Without ugly wrapper for Py < 3.2 that doesn't work half of the times...
  3 files changed, 3 insertions(+), 17 deletions(-)
 
 diff --git a/js/src/jit-test/jit_test.py b/js/src/jit-test/jit_test.py
-index d9f08a7..1824dee 100755
+index e27233d..b92a4ac 100755
 --- a/js/src/jit-test/jit_test.py
 +++ b/js/src/jit-test/jit_test.py
-@@ -28,7 +28,7 @@ def add_tests_dir_to_path():
+@@ -27,7 +27,7 @@ def add_tests_dir_to_path():
  add_tests_dir_to_path()
-
+ 
  from lib import jittests
 -from lib.tempfile import TemporaryDirectory
 +from tempfile import TemporaryDirectory
@@ -24,10 +24,10 @@ index d9f08a7..1824dee 100755
      change_env,
      get_cpu_count,
 diff --git a/js/src/tests/jstests.py b/js/src/tests/jstests.py
-index cc11c3d..fff7857 100755
+index f635a7d..3dc6d9e 100755
 --- a/js/src/tests/jstests.py
 +++ b/js/src/tests/jstests.py
-@@ -27,7 +27,7 @@ from subprocess import call, list2cmdline
+@@ -30,7 +30,7 @@ from subprocess import call, list2cmdline
  from lib.adaptor import xdr_annotate
  from lib.progressbar import ProgressBar
  from lib.results import ResultsSink, TestOutput
@@ -60,6 +60,3 @@ index 604864d..b791387 100644
 -        finally:
 -            shutil.rmtree(d)
 +from tempfile import TemporaryDirectory
---
-2.41.0
-

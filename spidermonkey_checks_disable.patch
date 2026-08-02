@@ -8,15 +8,12 @@ Subject: [PATCH] Don't die on SpiderMonkey checks
  1 file changed, 2 deletions(-)
 
 diff --git a/config/run_spidermonkey_checks.py b/config/run_spidermonkey_checks.py
-index 0f842d9..b49db52 100644
+index 1d7ed98..c064a16 100644
 --- a/config/run_spidermonkey_checks.py
 +++ b/config/run_spidermonkey_checks.py
-@@ -11,5 +11,3 @@ import sys
+@@ -11,5 +11,3 @@ import buildconfig
  def main(output, lib_file, *scripts):
      for script in scripts:
          retcode = subprocess.call([sys.executable, script], cwd=buildconfig.topsrcdir)
 -        if retcode != 0:
 -            raise Exception(script + " failed")
---
-2.31.1
-

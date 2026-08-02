@@ -4,23 +4,19 @@ Date: Wed, 15 Jul 2020 08:32:44 +0200
 Subject: [PATCH] Increase the test timeout for slower buildds
 
 Ported forward from Debian: https://bugs.debian.org/878284
+
+In Firefox 153 the Makefile.in check-jstests target was removed; the
+timeout is controlled by jstests.py's --timeout default instead.
 ---
- js/src/Makefile.in | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/js/src/Makefile.in b/js/src/Makefile.in
-index 6daed72..16db2de 100644
---- a/js/src/Makefile.in
-+++ b/js/src/Makefile.in
-@@ -53,7 +53,7 @@ check:: check-js-msg
-
- check-jstests:
- 	$(PYTHON3) -u $(srcdir)/tests/jstests.py \
--		--no-progress --format=automation --timeout 300 \
-+		--no-progress --format=automation --timeout 600 \
- 		$(JSTESTS_EXTRA_ARGS) \
- 		$(DIST)/bin/js$(BIN_SUFFIX)
-
---
-2.45.2
-
+diff --git a/js/src/tests/jstests.py b/js/src/tests/jstests.py
+--- a/js/src/tests/jstests.py
++++ b/js/src/tests/jstests.py
+@@ -134,7 +134,7 @@
+         "-t",
+         "--timeout",
+         type=float,
+-        default=150.0,
++        default=600.0,
+         help="Set maximum time a test is allows to run (in seconds).",
+     )
+     harness_og.add_argument(

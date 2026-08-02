@@ -4,22 +4,14 @@ Date: Wed, 15 Jul 2020 08:39:47 +0200
 Subject: [PATCH] Build: allow LOCAL_INCLUDES paths with topsrcdir or topobjdir
 
 ---
- python/mozbuild/mozbuild/frontend/emitter.py   | 10 ----------
- .../mozbuild/test/frontend/test_emitter.py     | 18 ------------------
- 2 files changed, 28 deletions(-)
-
 diff --git a/python/mozbuild/mozbuild/frontend/emitter.py b/python/mozbuild/mozbuild/frontend/emitter.py
-index 2ffde7c..e693acb 100644
 --- a/python/mozbuild/mozbuild/frontend/emitter.py
 +++ b/python/mozbuild/mozbuild/frontend/emitter.py
-@@ -1401,16 +1401,6 @@ class TreeMetadataEmitter(LoggingMixin):
+@@ -1440,13 +1440,6 @@
                          "(resolved to %s)" % (local_include, full_path),
                          context,
                      )
--            if (
--                full_path == context.config.topsrcdir
--                or full_path == context.config.topobjdir
--            ):
+-            if full_path in {context.config.topsrcdir, context.config.topobjdir}:
 -                raise SandboxValidationError(
 -                    "Path specified in LOCAL_INCLUDES "
 -                    "(%s) resolves to the topsrcdir or topobjdir (%s), which is "
@@ -30,13 +22,12 @@ index 2ffde7c..e693acb 100644
              local_includes.append(include_obj.path.full_path)
              yield include_obj
 diff --git a/python/mozbuild/mozbuild/test/frontend/test_emitter.py b/python/mozbuild/mozbuild/test/frontend/test_emitter.py
-index 01f64be..4080244 100644
 --- a/python/mozbuild/mozbuild/test/frontend/test_emitter.py
 +++ b/python/mozbuild/mozbuild/test/frontend/test_emitter.py
-@@ -1074,24 +1074,6 @@ class TestEmitterBasic(unittest.TestCase):
-
+@@ -1115,24 +1115,6 @@
+ 
          self.assertEqual(local_includes, expected)
-
+ 
 -    def test_local_includes_invalid(self):
 -        """Test that invalid LOCAL_INCLUDES are properly detected."""
 -        reader = self.reader("local_includes-invalid/srcdir")
@@ -58,6 +49,3 @@ index 01f64be..4080244 100644
      def test_local_includes_file(self):
          """Test that a filename can't be used in LOCAL_INCLUDES."""
          reader = self.reader("local_includes-filename")
---
-2.37.1
-
