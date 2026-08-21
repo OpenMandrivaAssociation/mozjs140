@@ -8,10 +8,10 @@ Subject: [PATCH] Don't throw InvalidOptionError on invalid options
  1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/python/mozbuild/mozbuild/configure/__init__.py b/python/mozbuild/mozbuild/configure/__init__.py
-index f23ffb4..0c0a429 100644
+index f3167f6..c9e1132 100644
 --- a/python/mozbuild/mozbuild/configure/__init__.py
 +++ b/python/mozbuild/mozbuild/configure/__init__.py
-@@ -562,10 +562,7 @@ class ConfigureSandbox(dict):
+@@ -557,10 +557,7 @@ class ConfigureSandbox(dict):
          for arg in self._helper:
              without_value = arg.split("=", 1)[0]
              msg = "Unknown option: %s" % without_value
@@ -20,6 +20,9 @@ index f23ffb4..0c0a429 100644
 -            else:
 -                raise InvalidOptionError(msg)
 +            self._logger.warning(msg)
- 
+
          # Run the execution queue
          for func, args in self._execution_queue:
+--
+2.31.1
+

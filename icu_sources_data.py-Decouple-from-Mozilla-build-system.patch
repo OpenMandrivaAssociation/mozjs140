@@ -10,17 +10,20 @@ so there's nothing to normalize. Avoid needing to import all of it.
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/intl/icu_sources_data.py b/intl/icu_sources_data.py
-index 3c5701a..fe11046 100644
+index 5dcc695..91c6644 100644
 --- a/intl/icu_sources_data.py
 +++ b/intl/icu_sources_data.py
 @@ -18,7 +18,9 @@ import sys
  import tempfile
- 
+
  from mozbuild.util import cpu_count
 -from mozpack import path as mozpath
 +# Close enough
 +import os.path as mozpath
 +mozpath.normsep = lambda p: p
- 
+
  # The following files have been determined to be dead/unused by a
  # semi-automated analysis. You can just remove any of the files below
+--
+2.31.1
+
