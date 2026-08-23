@@ -18,7 +18,7 @@
 
 Summary:	JavaScript interpreter and libraries
 Name:		mozjs140
-Version:	140.12.0
+Version:	140.14.0
 Release:	1
 License:	MPLv2.0 and BSD and GPLv2+ and GPLv3+ and LGPLv2.1 and LGPLv2.1+
 URL:		https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Releases/%{major}
@@ -60,21 +60,21 @@ BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: autoconf
 BuildRequires: m4
-BuildRequires:	pkgconfig(icu-i18n)
-BuildRequires:	pkgconfig(nspr)
-BuildRequires:	pkgconfig(libffi)
-BuildRequires:	pkgconfig(zlib)
-BuildRequires:	pkgconfig(python3)
-BuildRequires:	readline-devel
-BuildRequires:	zip
-BuildRequires:	python
-BuildRequires:	rust
-BuildRequires:	cargo
+BuildRequires: pkgconfig(icu-i18n)
+BuildRequires: pkgconfig(nspr)
+BuildRequires: pkgconfig(libffi)
+BuildRequires: pkgconfig(zlib)
+BuildRequires: pkgconfig(python3)
+BuildRequires: readline-devel
+BuildRequires: zip
+BuildRequires: python
+BuildRequires: rust
+BuildRequires: cargo
 BuildRequires: cbindgen
-BuildRequires:	llvm-devel clang-devel
+BuildRequires: llvm-devel clang-devel
 %ifarch %{x86_64}
 # FIXME without this, configure barfs on znver1. Need to find a proper fix.
-BuildRequires:	libssh2.so.1()(64bit)
+BuildRequires: libssh2.so.1()(64bit)
 %endif
 
 %description
