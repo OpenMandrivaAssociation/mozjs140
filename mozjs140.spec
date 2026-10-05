@@ -18,7 +18,7 @@
 
 Summary:	JavaScript interpreter and libraries
 Name:		mozjs140
-Version:	140.14.0
+Version:	140.17.0
 Release:	1
 License:	MPLv2.0 and BSD and GPLv2+ and GPLv3+ and LGPLv2.1 and LGPLv2.1+
 URL:		https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Releases/%{major}
