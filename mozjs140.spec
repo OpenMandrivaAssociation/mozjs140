@@ -123,6 +123,10 @@ pushd ../..
 #patch 17 -p1 -b .17~
 %patch 20 -p1 -b .20~
 
+# fix for rust 1.89
+sed -i 's/vendor == "pc"/vendor in ("pc", "openmandriva")/' \
+    build/moz.configure/rust.configure
+
 # Fix link for icu 76
 sed -i 's/icu-i18n/icu-uc &/' js/moz.configure
 popd
